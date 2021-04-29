@@ -1,6 +1,18 @@
 <template>
-  <div>
-    <router-view></router-view>
+  <div id="app"> 
+    <!-- 動的コンポーネントの様にrooter-viewの中身がhome.vueになったりusers.vueになったりする -->
+    <!-- その設定をrouter.jsのroutesの中に書く -->
+    <!-- router-viewの中に入るコンポーネント内には基本的にrouter-viewは置けず、おいても表示はされない -->
+    <!-- route-viewは複数記載することができるが、その場合はnameで区別する -->
+    <router-view name="header"></router-view>
+    <!-- router-viewにもトランジションをつけることができる -->
+    <!-- scrollBehaviorはURLが切り替わった瞬間に起こる -->
+    <!-- buttonを押した瞬間に#next-userがあったら下へいく --> 
+    <!-- fadeが起こる瞬間(=DOMが現れる時)にscrollBehaviorを実行できれば良い -->
+    <!-- before-enterをおくことで、vue-routerのscrollBehaviorが自動的にDOMが現れた瞬間に処理を行う -->
+    <!-- <transition name="fade" mode="out-in" @before-enter="beforeEnterScroll"> -->
+      <router-view></router-view>
+    <!-- </transition> -->
     <!-- App.vueが親コンポーネント -->
     <!-- LikeHeader,LikeNumberは子コンポーネント -->
     <!-- LikeHeaderはローカル登録なので、App.vueでしか使えない -->
@@ -246,6 +258,12 @@ export default {
     ComponentB
   },
   methods: {
+    // scrollBehaviorが実行される処理を書く
+    //beforeEnterScroll() {
+      // this:App.vue
+      // $root:main.jsに記載されているツリーのトップ
+      //this.$root.$emit('toriggerScroll');
+    //},
     // メソッドに引数を指定することで、その引数に子コンポーネント$emitの代理引数が当てはまる
     incrementNumber(value) {
       this.number = value
@@ -405,6 +423,29 @@ div {
   margin: auto;
   border-radius: 100px;
   background-color: deeppink;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+.link--active{
+  font-size: 20px;
 }
 </style>
 
