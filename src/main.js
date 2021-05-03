@@ -4,8 +4,11 @@ import Vue from 'vue';
 //vueファイル：インポートをしたら最終的にコンポーネントのオブジェクトになるのが
 import App from './App.vue';
 import LikeNumber from './components/LikeNumber.vue';
+
 //  Routerを使えるようにする
 import router from './router'
+
+import store from './store'
 
 Vue.config.productionTip = false;
 
@@ -14,15 +17,15 @@ Vue.config.productionTip = false;
 // to,fromにはrootオブジェクト($root)が入る。前と後のrootの状態
 // ログイン処理ができていない時にログインページに行く時などに使う
 //router.beforeEach((to, from, next) => {
-  // nextは関数としておく必要がある。nextがないと次のページへ進めない
-  // nextの引数にfalseを入れるとページの遷移をしない設定になる
-  // 引数にpathを入れることもできる。基本ifと使う
-  // 何もなしは続行
-  //if (to.path === '/users/1') {
-    // next({ path: '/' })とオブジェクトで書くことも可能
-    //next('/')
-  //}
-  //next();
+// nextは関数としておく必要がある。nextがないと次のページへ進めない
+// nextの引数にfalseを入れるとページの遷移をしない設定になる
+// 引数にpathを入れることもできる。基本ifと使う
+// 何もなしは続行
+//if (to.path === '/users/1') {
+// next({ path: '/' })とオブジェクトで書くことも可能
+//next('/')
+//}
+//next();
 //})
 
 //インポートしたLikeNumberをグローバル登録
@@ -113,7 +116,9 @@ Vue.mixin({
 new Vue({
   // Vue.useしていることでrouterというkeyが使えるようになっている
   // router: routerと同じ意味
+  // このvueインスタンスで含んでいる全てのコンポーネントで使用できる様になる
   router,
+  store,
   // 引数にオブジェクトをとることもできる
   // 上記と同じ意味
   // render: function(h) {
